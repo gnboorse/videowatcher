@@ -6,6 +6,9 @@ Chat is also handled through this.
 
 To run the server locally, use ./run.sh
 
+## Currently very, very much a work in progress.
+See Trello board here: https://trello.com/b/99Q4Ur4Q
+
 
 Links for research:
 
