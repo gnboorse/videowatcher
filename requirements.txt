@@ -1,0 +1,11 @@
+Flask==0.12.1
+Jinja2==2.9.6
+Werkzeug==0.12.1
+Flask-SQLAlchemy==2.2
+alembic==0.9.1
+setuptools==25.1.1
+Flask-WTF==0.14.2
+Flask-Login==0.4.0
+Flask-Migrate==2.0.3
+Flask-Script==2.0.5
+itsdangerous==0.24

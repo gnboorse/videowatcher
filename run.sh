@@ -6,7 +6,7 @@
 
 
 #set environment variables
-
+export SECRET_KEY=328626694831757786207988970988
 export FLASK_APP=videowatcher
 export FLASK_DEBUG=true ##set to false in production
 
@@ -18,6 +18,7 @@ export FLASK_DEBUG=true ##set to false in production
 #this includs the "videowatcher" package
 #this also calls the setup.py script
 pip3 install -e .
+pip3 install -r requirements.txt
 
 #run the actual server on localhost
 flask run --host=0.0.0.0
