@@ -15,14 +15,14 @@ Currently, videowatcher is only compatible with Unix-based systems.
 
 To make the magic happen, videowatcher relies on a complex package management system wrapped inside a virtual environment.
 
-Make sure you have installed **python3** and **virtualenv** using your package manager of choice. For example:
+Make sure you have installed **python3** and **virtualenv** using your package manager of choice. For example on Fedora-based systems:
 
 ~~~
 sudo dnf install python3
 sudo dnf install python-virtualenv
 ~~~
 
-Also install pip3 by downloading [link](https://bootstrap.pypa.io/get-pip.py "get-pip.py") and installing like so:
+Also install pip3 by downloading [get-pip.py](https://bootstrap.pypa.io/get-pip.py "get-pip.py") and installing like so:
 
 ~~~
 sudo python3 get-pip.py
@@ -30,7 +30,7 @@ sudo python3 get-pip.py
 
 ## Running the server
 
-To start the server, navigate into the base directory and run
+Once you've installed the prerequisites, navigate into the base directory and run
 
 ~~~
 ./run.sh
