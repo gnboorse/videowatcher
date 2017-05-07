@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-###
-### Server setup script
-### 
+### SERVER SETUP SCRIPT
+### Tested on Fedora 25 and Debian Jessie
+### be sure to have python3, pip3, and virtualenv installed
 
 
 #set environment variables
@@ -10,8 +10,10 @@ export SECRET_KEY=328626694831757786207988970988
 export FLASK_APP=videowatcher
 export FLASK_DEBUG=true ##set to false in production
 
-#start python virtual environment
-#(assumes we've already made the virtual environment)
+#create the python virtual environment
+virtualenv venv
+
+#activate the virtual environment
 . venv/bin/activate
 
 #makes sure all packages are installed properly
