@@ -1,5 +1,37 @@
-{% extends "template.htm" %}
+<!DOCTYPE html>
 
-{% block content %}
+<!-- this does not use bootstrap because bootstrap interferes with videojs -->
 
-{% endblock %}
+<html>
+    <head>
+        <title>{{ w.appTitle }} - Session {{ session.id }}</title>
+        <meta charset="UTF-8">
+        <link href="{{ w.videocss }}" rel="stylesheet">
+        
+        <style type="text/css">
+			body {
+				margin: 0px; /* make sure video pane fills screen width */ 
+			}
+			
+		</style>
+        <!-- IE8 compatibility-->
+        <script src="{{ w.videojs_ie }}"></script>
+        
+		<script src="{{ w.jquery }}"></script>
+
+        
+    </head>
+    <body>
+        <h1>{{ session.title }}</h1>
+        <video id="sessionplayer" class="video-js" controls preload="auto" data-setup="{}" >
+            <source src="{{ session.video_src }}" type="video/mp4">
+            <p class = "vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="{{ w.javascript_link }}" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+        
+        <script src="{{ w.videojs }}"></script>
+        <script src="{{ w.js }}"></script>
+    </body>
+</html>

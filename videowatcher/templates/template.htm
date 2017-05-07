@@ -1,25 +1,31 @@
-<html>
-    <head>
-        <title>{{ w.apptitle }}</title>
-        <link rel="stylesheet" type="text/css" href=" {{ w.semanticui }}">
-        <link rel="stylesheet" type="text/css" href=" {{ w.css }}">
-        
-        <script src=" {{ w.jquery }} " type="text/javascript"></script>
-        <script src=" {{ w.videojs }} " type="text/javascript"></script>
-        <script src=" {{ w.semanticjs }} " type="text/javascript"></script>
-        
-        <script src=" {{ w.js }} " type="text/javascript"></script>
-        
-    </head>
-    
-    
-    <body>
-    
-    {% block content %}
-    
-    {% endblock %}
-    </body>
+{% extends "bootstrap/base.html" %}
+
+{% block title %} {{ w.appTitle }} {% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- <link rel="stylesheet" type="text/css" href=" {{ w.semanticui }}"> -->
+    <link rel="stylesheet" type="text/css" href=" {{ w.css }}">
+{% endblock %}
 
 
+{% block scripts %}
+    {{ super() }}
+    <script src=" {{ w.jquery }} " type="text/javascript"></script>
+    <script src=" {{ w.videojs }} " type="text/javascript"></script>
+    <!-- <script src=" {{ w.semanticjs }} " type="text/javascript"></script>-->
+    
+    <script src=" {{ w.js }} " type="text/javascript"></script>
+    
+{% endblock %}
 
-</html>
+{% block content %}
+
+    <div class="container">
+        {% block page_content %}
+        
+        {% endblock %}
+    </div>
+
+{% endblock %}
+
