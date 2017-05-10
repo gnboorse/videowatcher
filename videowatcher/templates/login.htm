@@ -7,12 +7,21 @@
 
 {% endblock %}
 
+{%block loginactive %}active{% endblock %}
+
 {% block page_content %}
-    <div class="page-header">
+    <!--<div class="page-header">
         <h1>Login</h1>
-    </div>
-    
-    <div class="col-md-4">
-        {{ wtf.quick_form(form) }}
+    </div>-->
+    <div class="row marketing">
+        <div class="col-md-6">
+            <h4>Login</h4>
+            
+            {{ wtf.quick_form(form) }}
+        </div>
+        <div class="col-md-6">
+            <h4>Register</h4>
+            <p>Registration is not currently supported.</p>
+        </div>
     </div>
 {% endblock %}

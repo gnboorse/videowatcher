@@ -5,7 +5,7 @@
 {% block styles %}
     {{ super() }}
     <!-- <link rel="stylesheet" type="text/css" href=" {{ w.semanticui }}"> -->
-    <link rel="stylesheet" type="text/css" href=" {{ w.css }}">
+    <link rel="stylesheet" type="text/css" href="{{ w.css }}">
 {% endblock %}
 
 
@@ -15,16 +15,32 @@
     <script src=" {{ w.videojs }} " type="text/javascript"></script>
     <!-- <script src=" {{ w.semanticjs }} " type="text/javascript"></script>-->
     
-    <script src=" {{ w.js }} " type="text/javascript"></script>
     
 {% endblock %}
 
 {% block content %}
-
+    
     <div class="container">
+    <div class="header clearfix">
+    <nav>
+      <ul class="nav nav-pills pull-right">
+        <li role="presentation" class="{%block homeactive %}{% endblock %}"><a href="/">Home</a></li>
+        <li role="presentation" class="{%block aboutactive %}{% endblock %}"><a href="/about">About</a></li>
+        <li role="presentation" class="{%block loginactive %}{% endblock %}"><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+    <h3 class="text-muted">{{ w.appTitle }}</h3>
+</div>
         {% block page_content %}
         
         {% endblock %}
+        <footer class="footer">
+        <p>This project is provided as free software, available <a rel="external" target="_blank" href="https://github.com/normandy/videowatcher">on Github</a> under the terms of the GNU Public License.</p>
+        <div class="row text-center">
+            <img src="{{ w.pythonpowered }}" class="img-responsive center-block" alt="Python Powered"/>
+        </div>
+        
+      </footer>
     </div>
 
 {% endblock %}

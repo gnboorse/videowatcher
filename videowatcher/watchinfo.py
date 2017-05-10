@@ -55,5 +55,8 @@ class watchinfo:
     @property
     def javascript_link(self):
         return "http://videojs.com/html5-video-support/"
-        
-        
+    
+    #link to python logo
+    @property
+    def pythonpowered(self):
+        return 'https://www.python.org/static/community_logos/python-powered-w-100x40.png'

@@ -10,12 +10,15 @@ import json
 
 #views for this flask application
 
+#home page
 @app.route('/')
 def index():
-    s = ""
 
-    return render_template('index.htm', w=winf, test_var = s)
+    return render_template('index.htm', w=winf)
 
+
+#login page makes sure login is validated
+#otherwise it will flash a response back
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -28,11 +31,13 @@ def login():
     return render_template('login.htm', w = winf, form=form)
 
 
-@app.route('/secret')
-@login_required
-def secret():
-    return 'this is a secret'
+#basic about page
+@app.route('/about')
+def about():
+    return render_template('about.htm', w=winf)
 
+
+#HTML5 player
 @app.route('/session/')
 @app.route('/session/<sid>')
 @login_required
@@ -45,3 +50,16 @@ def session(sid=None):
             return render_template('session.htm', w = winf, session = session)
         #else: fail gracefully
     return redirect(url_for('index')) #change this to be sessions list page
+
+
+#this is the main JSON handler for synchronizing playback
+@app.route('/session_handle/', methods=['GET', 'POST'])
+@app.route('/session_handle/<sid>', methods=['GET', 'POST'])
+@login_required
+def session_handle(sid=None):
+    if sid != None:
+        session = watchsession.query.filter_by(id=sid).first()
+        if session != None:
+            return repr(session)
+    return 'nothing'
+    

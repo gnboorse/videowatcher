@@ -3,6 +3,7 @@
 from . import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import json
 
 
 #database model for storing user information
@@ -45,7 +46,16 @@ class watchsession(db.Model):
     video_src = db.Column(db.String(256))
     is_paused = db.Column(db.Boolean)
     time = db.Column(db.Float)
+    #add created_by as watchuser
     
-    
-    def __repr__(self):
-        return '<watchsession %r>' % session.id
+    #modified to provide JSON representation
+    def __repr__(self): 
+        session_dict = {}
+        session_dict["id"] = self.id
+        session_dict["title"] = self.title
+        session_dict["video_src"] = self.video_src
+        session_dict["is_paused"] = self.is_paused
+        session_dict["time"] = self.time
+        #add created_by (just the name)        
+        return json.dumps(session_dict)
+        
