@@ -1,0 +1,21 @@
+{% extends "template.htm" %}
+
+{% block sessionactive %}active {% endblock %}
+
+{% block page_content %}
+
+<h4>Welcome, {{ current_user.username }}! </h4>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Open Sessions</div>
+    <div class="panel-body">
+     <dl class="dl-horizontal">
+            {% for session in sessions %}
+                <dt>{{ session.title }}</dt><dd><a href="{{ s_url }}{{ session.id }}">{{ session.video_src }}</a></dd>
+            {% endfor %}
+        </dl>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -26,7 +26,23 @@
       <ul class="nav nav-pills pull-right">
         <li role="presentation" class="{%block homeactive %}{% endblock %}"><a href="/">Home</a></li>
         <li role="presentation" class="{%block aboutactive %}{% endblock %}"><a href="/about">About</a></li>
+        {% if current_user.is_authenticated %}
+        <li role="presentation"><a href="/logout">Logout</a></li>
+        <li role="presentation" class="dropdown {%block sessionactive %}{% endblock %}">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="/session_list" role="button" aria-haspopup="true" aria-expanded="false">
+              Sessions <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/session_list">List All</a></li>
+              <li role="separator" class="divider"></li>
+              {% for session in sessions %}
+                <li><a href="{{ s_url }}{{ session.id }}">{{ session.title }}</a></li>
+            {% endfor %}
+            </ul>
+        </li>
+        {% else %}
         <li role="presentation" class="{%block loginactive %}{% endblock %}"><a href="/login">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
     <h3 class="text-muted">{{ w.appTitle }}</h3>
