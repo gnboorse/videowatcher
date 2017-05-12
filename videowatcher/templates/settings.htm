@@ -1,0 +1,26 @@
+{% extends "template.htm" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="row marketing">
+    <div class="col-md-6">
+    
+        <div class="panel panel-primary">
+            <div class="panel-heading">Settings</div>
+            <div class="panel-body">
+             <dl class="dl-horizontal">
+                    {% if current_user.is_admin %}
+                        You're the root!
+                    {% endif %}
+             </dl>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-6">
+        <h4>Change Password</h4>
+        
+        {{ wtf.quick_form(form) }}
+    </div>
+</div>
+{% endblock %}

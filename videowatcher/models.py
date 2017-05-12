@@ -14,6 +14,7 @@ class watchuser(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    is_admin = db.Column(db.Boolean)
     
     # password hashing and checking through werkzeug
     @property
@@ -46,6 +47,7 @@ class watchsession(db.Model):
     video_src = db.Column(db.String(256))
     is_paused = db.Column(db.Boolean)
     time = db.Column(db.Float)
+    
     #add created_by as watchuser
     
     #modified to provide JSON representation

@@ -4,7 +4,12 @@
 
 {% block page_content %}
 
-<h4>Welcome, {{ current_user.username }}! </h4>
+<h2>Welcome, 
+    <span class="label label-default">{{ current_user.email }}!</span>
+     <a type="button" class="btn btn-xs pull-right" href="/settings">Settings&nbsp;
+        <span class="glyphicon glyphicon-cog"></span>
+    </a>
+</h2>
 
 <div class="panel panel-primary">
     <div class="panel-heading">Open Sessions</div>

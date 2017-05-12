@@ -2,11 +2,12 @@
 
 from . import app, winf, db, login_manager
 from .models import watchuser, watchsession
-from .forms import LoginForm 
+from .forms import LoginForm, PasswordChangeForm
 from flask import url_for, render_template, redirect, request, url_for, flash
 from flask_login import login_required, login_user, logout_user, current_user
 
 import json
+
 
 #views for this flask application
 
@@ -34,7 +35,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('session_list'))
-        flash('Invalid username or password.')
+        flash('Invalid username or password.', 'error')
     return render_template('login.htm', w = winf, form=form)
 
 #handle logout
@@ -87,3 +88,32 @@ def session_handle(sid=None):
             return repr(session)
     return 'nothing'
     
+#settings directory for 
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    sessionList = watchsession.query.all() #all sessions in database
+    sUrl = url_for('session')
+    form = PasswordChangeForm(request.form)
+    
+    # we have a validated form
+    if form.validate_on_submit():
+        #this is the current user object
+        user = watchuser.query.filter_by(email=current_user.email).first()
+        #make sure the current user validates themself
+        if user is not None and user.verify_password(form.old_password.data):
+            #we have a valid authentication
+            if form.new_password.data == form.confirm.data:
+                #new passwords are equal, so set password to new password
+                user.password = form.new_password.data
+                db.session.add(user) #this is basically an SQL insert
+                db.session.commit()
+                #should flash success
+            else:
+                flash('Password changed successfully.', 'success')
+        else:
+            flash('Passwords do not match.', 'error')
+    else:
+        flash('Invalid password.', 'error')
+    
+    return render_template('settings.htm', w = winf, form = form, sessions = sessionList, s_url = sUrl)
