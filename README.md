@@ -15,20 +15,21 @@ Currently, videowatcher is only compatible with Unix-based systems.
 
 To make the magic happen, videowatcher relies on a complex package management system wrapped inside a virtual environment.
 
-Make sure you have installed **python3** and **virtualenv** using your package manager of choice. For example on Fedora-based systems:
+Make sure you have installed **python3.5** and **virtualenv** using your package manager of choice. For example on Fedora-based systems:
 
 ~~~
-sudo dnf install python3
+sudo dnf install python3.5
 sudo dnf install python-virtualenv
-~~~
-
-Also install pip3 by downloading [get-pip.py](https://bootstrap.pypa.io/get-pip.py "get-pip.py") and installing like so:
 
 ~~~
-sudo python3 get-pip.py
+
+Also install **pip3** and **setuptools** by downloading [get-pip.py](https://bootstrap.pypa.io/get-pip.py "get-pip.py") and installing like so:
+
+~~~
+sudo python3.5 get-pip.py
 ~~~
 
-## Running the server
+## Running the server (Development)
 
 Once you've installed the prerequisites, navigate into the base directory and run
 
@@ -37,6 +38,30 @@ Once you've installed the prerequisites, navigate into the base directory and ru
 ~~~
 
 Everything should be live at http://localhost:5000/
+
+## Deploying to production server
+
+The package is designed to be deployed to [PythonAnywhere](https://www.pythonanywhere.com/ "PythonAnywhere")
+
+To begin, clone this repository into the working directory
+
+~~~
+git clone https://www.github.com/gnboorse/videowatcher
+~~~
+
+Go to the web tab and set up a custom app with Python version 3.5
+
+Run the setup.sh script
+
+~~~
+./setup.sh
+~~~
+
+Go back to the web tab and point the virtual environment path to the venv that was just created.
+
+Finally, edit your wsgi file to point to the videowatcher application directory (from git clone)
+
+Should be good to go. *Do not use run.sh to deploy to production.*
 
 # This is very, very much a work in progress
 
