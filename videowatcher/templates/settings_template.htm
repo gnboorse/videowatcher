@@ -1,0 +1,35 @@
+{% extends "template.htm" %}
+
+{% block settings_active %}active{% endblock %}
+
+{% block page_content %}
+<h2>Settings</h2>
+<div class="row marketing">
+    <div class="col-md-6">
+    
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="{% block change_password_active %}{% endblock %}"><a href="/settings">Change Password</a></li>
+            {% if current_user.is_admin %}
+            <li role="presentation" class="{% block add_user_active %}{% endblock %}"><a href="/adduser">Add User</a></li>
+            <li role="presentation" class="{% block users_active %}{% endblock %}"><a href="/users">List User</a></li>
+            <li role="presentation" class="{% block config_active %}{% endblock %}"><a href="/config">Configuration</a></li>
+            {% endif %}
+        </ul>
+        
+    </div>
+    <div class="col-md-6">
+        
+        <div class="panel panel-primary">
+            <div class="panel-heading">{% block settings_title %} {% endblock %}</div>
+            <div class="panel-body">
+             <dl class="dl-horizontal">
+        {% block settings_content %}
+        
+        {% endblock %}
+         </dl>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

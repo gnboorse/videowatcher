@@ -3,23 +3,22 @@
 
 {% block title %}
 
-     {{ w.appTitle }} - Login 
+     {{ w.appTitle }} - New Session 
 
 {% endblock %}
 
-{%block loginactive %}active{% endblock %}
+{%block sessionactive %}active{% endblock %}
 
 {% block page_content %}
 
     <div class="row marketing">
         <div class="col-md-6">
-            <h4>Login</h4>
+            <h2>Make a new session</h2>
             
             {{ wtf.quick_form(form) }}
         </div>
         <div class="col-md-6">
-            <h4>Register</h4>
-            <p>Registration is not currently supported.</p>
+            
         </div>
     </div>
 {% endblock %}

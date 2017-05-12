@@ -60,3 +60,8 @@ class watchinfo:
     @property
     def pythonpowered(self):
         return 'https://www.python.org/static/community_logos/python-powered-w-100x40.png'
+        
+    #link to github project
+    @property
+    def github(self):
+        return 'https://github.com/gnboorse/videowatcher'

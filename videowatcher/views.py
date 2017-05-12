@@ -2,7 +2,7 @@
 
 from . import app, winf, db, login_manager
 from .models import watchuser, watchsession
-from .forms import LoginForm, PasswordChangeForm
+from .forms import LoginForm, PasswordChangeForm, NewUserForm, NewSessionForm
 from flask import url_for, render_template, redirect, request, url_for, flash
 from flask_login import login_required, login_user, logout_user, current_user
 
@@ -77,6 +77,24 @@ def session_list():
     sUrl = url_for('session')
     return render_template('sessions.htm', w = winf, sessions = sessionList, s_url = sUrl)
 
+@app.route('/newsession', methods=['GET', 'POST'])
+@login_required
+def new_session():
+    sessionList = watchsession.query.all() #all sessions in database
+    sUrl = url_for('session')
+    
+    form = NewSessionForm()
+    
+    if form.validate_on_submit():
+        #we have a valid form submission
+        new_session_ = watchsession(title=form.title.data, video_src=form.video_link.data, is_paused=True, time=0)
+        db.session.add(new_session_)
+        db.session.commit()
+        return redirect(url_for('session_list'))
+    
+    
+    return render_template('newsession.htm', w = winf, sessions = sessionList, s_url = sUrl, form = form)
+
 #this is the main JSON handler for synchronizing playback
 @app.route('/session_handle/', methods=['GET', 'POST'])
 @app.route('/session_handle/<sid>', methods=['GET', 'POST'])
@@ -94,7 +112,7 @@ def session_handle(sid=None):
 def settings():
     sessionList = watchsession.query.all() #all sessions in database
     sUrl = url_for('session')
-    form = PasswordChangeForm(request.form)
+    form = PasswordChangeForm()
     
     # we have a validated form
     if form.validate_on_submit():
@@ -117,3 +135,50 @@ def settings():
         flash('Invalid password.', 'error')
     
     return render_template('settings.htm', w = winf, form = form, sessions = sessionList, s_url = sUrl)
+    
+#add user page
+@app.route('/adduser', methods=['GET', 'POST'])
+@login_required
+def adduser():
+    sessionList = watchsession.query.all() #all sessions in database
+    sUrl = url_for('session')
+    
+    #administrators only
+    if not current_user.is_admin:
+        return redirect(url_for('settings'))
+    
+    form = NewUserForm()
+    
+    if form.validate_on_submit():
+        new_user = watchuser(email=form.email.data, username=form.email.data, password=form.password.data, is_admin=form.administrator.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("User created successfully.")
+    
+    return render_template('adduser.htm', w = winf, sessions = sessionList, s_url = sUrl, form = form)
+    
+#users deletion page (lists all users)
+@app.route('/users', methods=['GET','POST'])
+@login_required
+def users():
+    sessionList = watchsession.query.all() #all sessions in database
+    sUrl = url_for('session')
+    
+    #administrators only
+    if not current_user.is_admin:
+        return redirect(url_for('settings'))
+        
+    return render_template('users.htm', w = winf, sessions = sessionList, s_url = sUrl)
+    
+@app.route('/config', methods=['GET', 'POST'])
+@login_required
+def config():
+    sessionList = watchsession.query.all() #all sessions in database
+    sUrl = url_for('session')
+    
+    #administrators only
+    if not current_user.is_admin:
+        return redirect(url_for('settings'))
+        
+    return render_template('config.htm', w = winf, sessions = sessionList, s_url = sUrl)
+    

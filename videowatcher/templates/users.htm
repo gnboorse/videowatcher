@@ -1,12 +1,12 @@
 {% extends "settings_template.htm" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block change_password_active %}active{% endblock %}
+{% block user_active %}active{% endblock %}
 
 {% block settings_title %}
-Change Password
+Users List
 {% endblock %}
 
 {% block settings_content %}
-        {{ wtf.quick_form(form) }}
+
 {% endblock %}
