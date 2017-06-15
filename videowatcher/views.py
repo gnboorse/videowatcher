@@ -162,13 +162,14 @@ def adduser():
 @login_required
 def users():
     sessionList = watchsession.query.all() #all sessions in database
+    usersList = watchuser.query.all() #all sessions in database
     sUrl = url_for('session')
-    
+    cUrl = url_for('config')
     #administrators only
     if not current_user.is_admin:
         return redirect(url_for('settings'))
         
-    return render_template('users.htm', w = winf, sessions = sessionList, s_url = sUrl)
+    return render_template('users.htm', w = winf, users = usersList, sessions = sessionList, s_url = sUrl, c_url = cUrl)
     
 @app.route('/config', methods=['GET', 'POST'])
 @login_required

@@ -1,12 +1,16 @@
 {% extends "settings_template.htm" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block user_active %}active{% endblock %}
+{% block users_active %}active{% endblock %}
 
 {% block settings_title %}
 Users List
 {% endblock %}
 
 {% block settings_content %}
+
+{% for user in users %}
+    <dt>{{ user.email }}</dt><dd><a href="{{ c_url }}{{ user.id }}">Manage</a></dd>
+{% endfor %}
 
 {% endblock %}

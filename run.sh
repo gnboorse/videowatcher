@@ -4,7 +4,9 @@
 ### Use this to start the development environment server
 
 ##call the setup script just to be sure
-. setup.sh
+if [ ! -d venv/ ]; then
+    . setup.sh
+fi
 
 #export the package environment variable
 export FLASK_APP=videowatcher
