@@ -31,9 +31,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'da
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#TODO: change this, but for now it's the dev api endpoint
-app.config['VW_RESTAPI'] = 'http://10.0.1.152:8080'
-
 #uses Flask-Login to manage login session
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'

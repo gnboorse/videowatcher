@@ -88,13 +88,9 @@ def new_session():
     if form.validate_on_submit():
         #we have a valid form submission
 
-        ## TODO: push this create event to the REST API and get session token
-
         new_session_ = watchsession(title=form.title.data, video_src=form.video_link.data, is_paused=True, time=0)
         db.session.add(new_session_)
         db.session.commit()
-
-
 
         return redirect(url_for('session_list'))
     
@@ -109,7 +105,15 @@ def session_handle(sid=None):
     if sid != None:
         session = watchsession.query.filter_by(id=sid).first()
         if session != None:
-            return repr(session)
+            if request.method =='POST' and request.is_json:
+                #update
+                myjson = request.get_json()
+                if isinstance(myjson['ispaused'], bool) and isinstance(myjson['time'], int):
+                    session.time = myjson['time']
+                    session.is_paused = myjson['ispaused']
+                    db.session.commit()
+            else:
+                return repr(session)
     return 'nothing'
     
 #settings directory for 
