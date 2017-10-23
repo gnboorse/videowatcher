@@ -2,15 +2,13 @@
 //javascript to handle automatic update of video playback
 function videoloop(session_id)
 {
-    $.get("/session_handle/" + session_id,
-        function(data)
+    $.getJSON("/session_handle/" + session_id.toString(),
+        function(json)
         {
-            console.log(data);
             //if success:
-            var json_obj = JSON.parse(data.responseText);
 
-            var time = json_obj.time;
-            var is_paused = json_obj.is_paused;
+            var time = json.time;
+            var is_paused = json.is_paused;
 
             var myPlayer = videojs("sessionplayer"); //this is the playback object
 
