@@ -5,10 +5,15 @@ function videoloop(session_id)
     $.get("/session_handle/" + session_id,
         function(data)
         {
+            console.log(data);
             //if success:
-            var time = data.time;
-            var is_paused = data.is_paused;
+            var json_obj = JSON.parse(data.responseText);
+
+            var time = json_obj.time;
+            var is_paused = json_obj.is_paused;
+
             var myPlayer = videojs("sessionplayer"); //this is the playback object
+
             if (myPlayer.paused() != is_paused)
             {
                 //we have to set it
