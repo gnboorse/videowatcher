@@ -90,6 +90,9 @@ def new_session():
         new_session_ = watchsession(title=form.title.data, video_src=form.video_link.data, is_paused=True, time=0)
         db.session.add(new_session_)
         db.session.commit()
+
+        ## TODO: push this create event to the REST API as well
+
         return redirect(url_for('session_list'))
     
     

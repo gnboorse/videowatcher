@@ -46,7 +46,7 @@ class watchsession(db.Model):
     title = db.Column(db.String(128), index=True)
     video_src = db.Column(db.String(256))
     is_paused = db.Column(db.Boolean)
-    time = db.Column(db.Float)
+    time = db.Column(db.Integer)
     
     #add created_by as watchuser
     
