@@ -87,11 +87,14 @@ def new_session():
     
     if form.validate_on_submit():
         #we have a valid form submission
+
+        ## TODO: push this create event to the REST API and get session token
+
         new_session_ = watchsession(title=form.title.data, video_src=form.video_link.data, is_paused=True, time=0)
         db.session.add(new_session_)
         db.session.commit()
 
-        ## TODO: push this create event to the REST API as well
+
 
         return redirect(url_for('session_list'))
     
