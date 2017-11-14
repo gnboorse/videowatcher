@@ -1,0 +1,39 @@
+/*
+Specific selectors for the video player
+*/
+
+.videocontent
+{
+	height:50%;
+	/*max-width:640px;*/
+}
+body {
+	margin: 0px; /* make sure video pane fills screen width */ 
+	font-family: Helvetica;
+	background:black;
+}
+
+.session-overlay
+{
+	position: fixed; /* Sit on top of the page content */
+   /* display: none;*/ /* Hidden by default */
+    /*width: 100%;*/ /* Full width (cover the whole page) */
+    /*height: 100%;*/ /* Full height (cover the whole page) */
+    top: 10; 
+    left: 10;
+    /*right: 0;
+    bottom: 0;*/
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.session-header
+{
+	color:white;
+}
+
+a a:visited a:hover
+{
+	color:white!important;
+}
