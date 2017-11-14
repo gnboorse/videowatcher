@@ -7,13 +7,7 @@
         <title>{{ w.appTitle }} - Session {{ session.id }}</title>
         <meta charset="UTF-8">
         <link href="{{ w.videocss }}" rel="stylesheet">
-        
-        <style type="text/css">
-			body {
-				margin: 0px; /* make sure video pane fills screen width */ 
-			}
-			
-		</style>
+        <link rel="stylesheet" type="text/css" href="{{ w.sessioncss }}">   
         <!-- IE8 compatibility-->
         <script src="{{ w.videojs_ie }}"></script>
         
@@ -22,17 +16,29 @@
         
     </head>
     <body>
-        <h1>{{ session.title }}</h1>
-        <video id="sessionplayer" class="video-js" controls preload="auto" data-setup="{}" >
-            <source src="{{ session.video_src }}" type="video/mp4">
-            <p class = "vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a web browser that
-                <a href="{{ w.javascript_link }}" target="_blank">supports HTML5 video</a>
-            </p>
-        </video>
-        
+        <div class="session-overlay session-header"><h1 >{{ session.title }}</h1>&nbsp; <a href="/session_list" class="session-header">← back</a></div>
+
+        <div class="videocontent">
+            <video id="sessionplayer" class="video-js vjs-default-skin vjs-16-9 vjs-big-play-centered" controls preload="auto" data-setup="{}" >
+                <source src="{{ session.video_src }}" type="video/mp4">
+                <p class = "vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="{{ w.javascript_link }}" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
         <script src="{{ w.videojs }}"></script>
         <script src="{{ w.js }}"></script>
-        <script type="text/javascript">setInterval(function(){videoloop({{ session.id }});}, 5000);</script>
+        <script type="text/javascript">
+
+        $( document ).ready(function() {
+
+            //setInterval(function(){videoloop({{ session.id }});}, 5000);
+            var session_id = {{ session.id }};
+            setEvents(session_id);
+
+        });
+
+        </script>
     </body>
 </html>

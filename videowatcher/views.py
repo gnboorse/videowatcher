@@ -108,10 +108,11 @@ def session_handle(sid=None):
             if request.method =='POST' and request.is_json:
                 #update
                 myjson = request.get_json()
-                if isinstance(myjson['is_paused'], bool) and isinstance(myjson['time'], int):
-                    session.time = myjson['time']
-                    session.is_paused = myjson['is_paused']
-                    db.session.commit()
+                
+                # if isinstance(myjson['is_paused'], bool) and isinstance(myjson['time'], int):
+                session.time = myjson['time']
+                session.is_paused = myjson['is_paused']
+                db.session.commit()
             else:
                 return repr(session)
     return 'nothing'

@@ -45,6 +45,11 @@ class watchinfo:
     @property
     def js(self):
         return url_for('static', filename='site.js')
+
+
+    @property   
+    def sessioncss(self):
+        return url_for('static', filename='session.css')
     
     #main css for session styles
     @property
